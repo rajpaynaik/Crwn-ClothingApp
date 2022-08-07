@@ -1,45 +1,13 @@
-import './categories.styles.scss'
+import Home from './routes/home/home.component'
+import { Routes, Route } from 'react-router-dom'
+import { Navigation } from './navigation/navigation.components'
 
-const App = () => {
-  return (
-    <div className="categories-container">
-      <div className="category-container">
-        {/* <img/> */}
-        <div className="category-body-container">
-          <h1>Hats</h1>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        {/* <img/> */}
-        <div className="category-body-container">
-          <h1>Jackets</h1>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        {/* <img/> */}
-        <div className="category-body-container">
-          <h1>Sneakers</h1>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        {/* <img/> */}
-        <div className="category-body-container">
-          <h1>Womens</h1>
-          <p>Shop Now</p>
-        </div>
-      </div>
-      <div className="category-container">
-        {/* <img/> */}
-        <div className="category-body-container">
-          <h1>Mens</h1>
-          <p>Shop Now</p>
-        </div>
-      </div>
-    </div>
-  )
-}
+const App = () => (
+  <Routes>
+    <Route path="/" element={<Navigation />}>
+      <Route index element={<Home />} />
+    </Route>
+  </Routes>
+)
 
 export default App
