@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { useEffect } from 'react'
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from '../../utils/firebase/firebase.utils'
 
 const defaultFormFields = {
   displayName: '',
@@ -21,10 +24,31 @@ const SignUpForm = () => {
     setFormFields({ ...formFields, [name]: value })
   }
 
+  const resetFields = () => {
+    setFormFields(defaultFormFields)
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    if (password !== confirmPassword) {
+      alert('passwords do not match')
+      return
+    }
+
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(email, password)
+      await createUserDocumentFromAuth(user, { displayName })
+      resetFields()
+    } catch (e) {
+      console.log('error occurred:', e.message)
+    }
+  }
+
   return (
     <div>
       <h1>SignUp with your email and password</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Display Name</label>
         <input
           type="text"
@@ -57,6 +81,7 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
+        <button onClick={handleChange}>Sign Up</button>
       </form>
     </div>
   )
