@@ -3,6 +3,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.utils'
+import Button from '../button/button-type.components'
 import FormInput from '../form-input/form-input.components'
 import '../sign-up/sign-up.styles.scss'
 
@@ -87,7 +88,9 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <button onClick={handleChange}>Sign Up</button>
+        <Button type="submit" buttonType="inverted">
+          Sign Up
+        </Button>
       </form>
     </div>
   )
