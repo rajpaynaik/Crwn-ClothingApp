@@ -1,16 +1,19 @@
 import { Fragment, useContext } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { ReactComponent as CrwnLogo } from '../assests/crown.svg'
+import CartIcon from '../components/cart-icon/cart-icon.components'
 import { UserContext } from '../context/user.context'
-import '../navigation/navigation.styles.scss'
+import './navigation.styles.scss'
 import { signOutUser } from '../utils/firebase/firebase.utils'
+import CartDropDown from '../components/cart-dropdown/cart-dropdown.components'
+import { CartContext } from '../context/cart.context'
 
 export const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext)
-  // console.log(currentUser)
+  const { currentUser } = useContext(UserContext)
+  const { isCartOpen } = useContext(CartContext)
+
   const signOutHandler = async () => {
     await signOutUser()
-    setCurrentUser(null)
   }
 
   return (
@@ -34,6 +37,8 @@ export const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CartIcon />
+          {isCartOpen && <CartDropDown />}
         </div>
       </div>
       <Outlet />
