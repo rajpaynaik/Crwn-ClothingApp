@@ -4,9 +4,7 @@ import { useContext } from 'react'
 import CheckOutItem from '../../components/checkout-item/checkout-item.component'
 
 const CheckOut = () => {
-  const { cartItems, addItemToCart, deleteItemFromCart } = useContext(
-    CartContext,
-  )
+  const { cartItems, cartTotal } = useContext(CartContext)
   return (
     <div className="checkout-container">
       <div className="checkout-header">
@@ -17,10 +15,10 @@ const CheckOut = () => {
           <span>Description</span>
         </div>
         <div className="header-block">
-          <span>Quantity</span>
+          <span>Price</span>
         </div>
         <div className="header-block">
-          <span>Price</span>
+          <span>Quantity</span>
         </div>
         <div className="header-block">
           <span>Remove</span>
@@ -28,9 +26,9 @@ const CheckOut = () => {
       </div>
 
       {cartItems.map((cartItem) => (
-        <CheckOutItem cartItem={cartItem} />
+        <CheckOutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <span className="total">Total:0</span>
+      <span className="total">Total:${cartTotal}</span>
     </div>
   )
 }
